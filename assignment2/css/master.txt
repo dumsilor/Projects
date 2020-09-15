@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 /*body {
   column-count: 3;
   }
@@ -60,3 +61,67 @@ section{
   }
 
 }
+=======
+/*body {
+  column-count: 3;
+  }
+
+@media (max-width:1200px) and (min-width:993px){
+  #div1{
+    display: block;
+  }
+}
+@media (max-width: 992px) {
+  body{
+    column-count: 1;
+  }
+}
+*/
+
+div{
+  border: 1px solid black;
+  width: 25%;
+  height: 40%;
+  margin-right: auto;
+  margin-left: auto;
+  display: inline-block;
+  padding: 2%;
+  background:  gray;
+}
+
+h1{
+  background: maroon;
+  display: inline-block;
+  float: right;
+  clear: left;
+}
+section{
+  padding-top:25%;
+}
+
+@media (max-width:992px) {
+  div{
+    border: 1px solid black;
+    width: 30%;
+    height: 40%;
+    margin-right: auto;
+    margin-left: auto;
+    display:inline-block;
+    padding: 2%;
+  }
+
+}
+
+@media (max-width:768px){
+  div{
+    border: 1px solid black;
+    width: 80%;
+    height: 40%;
+    margin-right: auto;
+    margin-left: auto;
+    display:inline-block;
+    padding: 2%;
+  }
+
+}
+>>>>>>> 8390d966efa11e99c1c485ad19791b26d343e68b
