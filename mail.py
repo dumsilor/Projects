@@ -104,6 +104,36 @@ class excel_parcer:
             x +=1
         return client
 
+    def upstream (self):
+         from openpyxl import load_workbook
+         import re
+         upstream_in =  []
+         upstream_out = []
+         columns = ["E","F"]
+         #from openpyxl import load_workbook
+         workbook = load_workbook(filename = self.file)
+         sheets = workbook.sheetnames
+         sheet = sheets[0]
+         ic_bw_sheet = workbook[sheet]
+         for column in columns:
+            start = column + self.cell_start
+            end = column + self.cell_end
+            for cell_range in ic_bw_sheet[start:end]:
+                for cell in cell_range:
+                    if column == "E":
+                        upstream_in.append(cell.value)
+                    else:
+                        upstream_out.append(cell.value)
+         return upstream_in,upstream_out
+
+    def upstream_html(out_in_tuple,upstreams):
+
+
+
+
+
+
+
 ########################################################################
 
 #enterprise Client
@@ -147,6 +177,19 @@ ggc_client_bw = ggc_client.make_list_bw()
 ggc_client_remarks = ggc_client.make_list_remarks(len(ggc_client_list), lsp_count+int(lsp_start_cell))
 ggc_count = len(ggc_client_list)
 ggc_html = lsp_client.make_html(ggc_count,ggc_client_list,ggc_client_bw,ggc_client_remarks)
+
+
+########################################################################
+
+#Upstream Bandwidth
+
+########################################################################
+
+upstream = excel_parcer(filename,"5",'6')
+upstream_list = upstream.upstream()
+print(upstream_list)
+
+
 
 
 ########################################################################
@@ -197,17 +240,35 @@ mail_body = """
                 <tr class=head>
                     <th colspan="4">Enterprise Client</th>
                 </tr>
+                <tr>
+                    <th>Sr. Number</th>
+                    <th>Name</th>
+                    <th>Bandwidth</th>
+                    <th>Remarks</th>
+                </tr>
             </thead>
             <tbody>""" + ent_html + """</tbody>
             <thead>
                 <tr class=head>
                     <th colspan="4">LSP Client</th>
                 </tr>
+                <tr>
+                    <th>Sr. Number</th>
+                    <th>Name</th>
+                    <th>Bandwidth</th>
+                    <th>Remarks</th>
+                </tr>
             </thead>
             <tbody>""" + lsp_html + """</tbody>
             <thead>
                 <tr class=head>
                     <th colspan="4">GGC Client</th>
+                </tr>
+                <tr>
+                    <th>Sr. Number</th>
+                    <th>Name</th>
+                    <th>Bandwidth</th>
+                    <th>Remarks</th>
                 </tr>
             </thead>
             <tbody>""" + ggc_html + """</tbody>
@@ -288,6 +349,6 @@ text = message.as_string()
 context = ssl.create_default_context()
 with smtplib.SMTP_SSL("mta.brilliant.com.bd", 465, context=context) as server:
     server.login(sender_email, password)
-    server.sendmail(
-        sender_email, receiver_email,text
-    )
+    #server.sendmail(
+    #    sender_email, receiver_email,text
+    #)
