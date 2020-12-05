@@ -233,78 +233,6 @@ up_html = upstream.upstream_html(upstream_list)
 
 
 
-
-class send_mail:
-    def __init__(self,sender, receiver_list,subject,caption,html_body,filename):
-        self.filename = filename
-        self.sender = sender
-        self.receiver_list = receiver_list
-        self.subject = subject
-        self.caption =caption
-        self.html_body = html_body
-
-        import email, smtplib, ssl
-
-        from email import encoders
-        from email.mime.base import MIMEBase
-        from email.mime.multipart import MIMEMultipart
-        from email.mime.text import MIMEText
-
-        password = "ipcore#@!"
-
-        message = MIMEMultipart()
-        message["Subject"] = subject
-        message["From"] = sender
-        message["To"] = ','.join(receiver_list)
-        message["Cc"] = ','.join(caption)
-
-
-        # Turn these into plain/html MIMEText objects
-        #part1 = MIMEText(text, "plain")
-        part2 = MIMEText(html_body, "html")
-
-        # Add HTML/plain-text parts to MIMEMultipart message
-        # The email client will try to render the last part first
-        #message.attach(part1)
-        message.attach(part2)
-
-        with open(filename, "rb") as attachment:
-            # Add file as application/octet-stream
-            # Email client can usually download this automatically as attachment
-            part = MIMEBase("application", "octet-stream")
-            part.set_payload(attachment.read())
-
-        # Encode file in ASCII characters to send by email
-        encoders.encode_base64(part)
-
-        # Add header as key/value pair to attachment part
-        part.add_header(
-            "Content-Disposition",
-            f"attachment; filename= {filename}",
-        )
-
-        # Add attachment to message and convert message to string
-        message.attach(part)
-        text = message.as_string()
-
-
-        # Create secure connection with server and send email
-        context = ssl.create_default_context()
-        with smtplib.SMTP_SSL("mta.brilliant.com.bd", 465, context=context) as server:
-            server.login(sender, password)
-            server.sendmail(
-                sender, receiver_list,text
-            )
-
-
-
-
-
-
-
-
-
-
 ########################################################################
 
 #Creating HTML
@@ -325,9 +253,6 @@ mail_body = """
 <html>
     <head>
         <style>
-            table {
-            padding: 0 20px 0 20px;
-            }
             tr, td, th { border: 1px solid black;
                          text-align: center;
                          padding: 15px;
@@ -364,6 +289,7 @@ mail_body = """
         </style>
     </head>
     <body>
+        <br>
         <p> Dear Sir, <br>
         <br>
         Kindly find the attached mail for InterCloud Bandwidth report:
@@ -449,8 +375,6 @@ mail_body = """
 
             </tbody>
         </table>
-        <br>
-        <br>
         <p>Regards,</p>
         <br>
         <p>""" + name + """</p>
@@ -462,28 +386,71 @@ mail_body = """
 </html>"""
 
 #print(mail_body)
-#fhandle.write(mail_body)
-#fhandle.close()
+fhandle.write(mail_body)
+fhandle.close()
 
 
 ########################################################################
 
-#Creating Tunnel and Sending Mail For Intercloud
+#Creating Tunnel and Sending Mail
 
 ########################################################################
+
+import email, smtplib, ssl
+
+from email import encoders
+from email.mime.base import MIMEBase
+from email.mime.multipart import MIMEMultipart
+from email.mime.text import MIMEText
+
 sender_email = "core@brilliant.com.bd"
 receiver_email = ["mosiur.rahman@novocom-bd.com","mosiur.rahman@brilliant.com.bd"]
 caption = ["core@brilliant.com.bd"]
-subject = "Bandwidth report"
+password = "ipcore#@!"
 
-send_mail(sender_email,receiver_email,subject,caption,mail_body,filename)
+message = MIMEMultipart()
+message["Subject"] = "multipart test"
+message["From"] = sender_email
+message["To"] = ','.join(receiver_email)
+message["Cc"] = ','.join(caption)
 
 
+# Turn these into plain/html MIMEText objects
+#part1 = MIMEText(text, "plain")
+part2 = MIMEText(mail_body, "html")
+
+# Add HTML/plain-text parts to MIMEMultipart message
+# The email client will try to render the last part first
+#message.attach(part1)
+message.attach(part2)
 
 
+filename = "IC-BW-Report.xlsx"
 
-########################################################################
+with open(filename, "rb") as attachment:
+    # Add file as application/octet-stream
+    # Email client can usually download this automatically as attachment
+    part = MIMEBase("application", "octet-stream")
+    part.set_payload(attachment.read())
 
-#Bandwidth Report For NovoCom
+# Encode file in ASCII characters to send by email
+encoders.encode_base64(part)
 
-########################################################################
+# Add header as key/value pair to attachment part
+part.add_header(
+    "Content-Disposition",
+    f"attachment; filename= {filename}",
+)
+
+# Add attachment to message and convert message to string
+message.attach(part)
+text = message.as_string()
+
+
+# Create secure connection with server and send email
+context = ssl.create_default_context()
+with smtplib.SMTP_SSL("mta.brilliant.com.bd", 465, context=context) as server:
+    server.login(sender_email, password)
+#    server.sendmail(
+#        sender_email, receiver_email,text
+#    )
