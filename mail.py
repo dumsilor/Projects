@@ -3,35 +3,38 @@
 #Processing Excel using VBA
 
 ########################################################################
+from openpyxl import load_workbook
 
 class excel_parcer:
 
-    def __init__(self,file,cell_start,cell_end):
+    def __init__(self,file,cell_start,cell_end,sheet_number):
         self.file = file
         self.cell_start = cell_start
         self.cell_end = cell_end
+        workbook = load_workbook(filename = self.file)
+        self.workbook = workbook
+        sheets = workbook.sheetnames
+        sheet = sheets[sheet_number]
+        self.sheet = sheet
 
     def make_list_client (self):
-        from openpyxl import load_workbook
-        import re
-        #from openpyxl import load_workbook
-        workbook = load_workbook(filename = self.file)
+        workbook = self.workbook
+        sheet = self.sheet
+        worksheet = workbook[sheet]
         client_list = []
         start = 'C'+self.cell_start
         end ='C'+self.cell_end
-        for worksheet in workbook:
-            status =False
-            for cell_range in worksheet[start:end]:
-                if status == True:
+        status =False
+        for cell_range in worksheet[start:end]:
+            if status == True:
+                break
+            for cell in cell_range:
+                if cell.value == "Total":
+                    status = True
+                    row_start = cell.row
                     break
-                for cell in cell_range:
-                    if cell.value == "Total":
-                        status = True
-                        row_start = cell.row
-                        break
-                    else:
-                        client_list.append(cell.value)
-            break
+                else:
+                    client_list.append(cell.value)
         row_count = len(client_list)
         next_cell = str(row_start+1)
         workbook.close()
@@ -39,52 +42,45 @@ class excel_parcer:
 
 
     def make_list_bw (self):
-        from openpyxl import load_workbook
-        import re
-        #from openpyxl import load_workbook
-        workbook = load_workbook(filename = self.file)
+        workbook = self.workbook
+        sheet = self.sheet
+        worksheet = workbook[sheet]
         bw_list = []
         start = 'D'+self.cell_start
         end ='D'+self.cell_end
-
-        for worksheet in workbook:
-            status =False
-            for cell_range in worksheet[start:end]:
-                if status == True:
+        status =False
+        for cell_range in worksheet[start:end]:
+            if status == True:
+                break
+            for cell in cell_range:
+                if str(cell.value).startswith("=SUM"):
+                    status = True
                     break
-                for cell in cell_range:
-                    if str(cell.value).startswith("=SUM"):
-                        status = True
-                        break
-                    else:
-                        bw_list.append(cell.value)
-            break
+                else:
+                    bw_list.append(cell.value)
             workbook.close()
         return bw_list
 
-    def make_list_remarks (self,list_len,index):
-        from openpyxl import load_workbook
-        import re
-        #from openpyxl import load_workbook
-        workbook = load_workbook(filename = self.file)
+    def make_list_remarks (self,list_len,index,column):
+        workbook = self.workbook
+        sheet = self.sheet
+        worksheet = workbook[sheet]
         remarks_list = []
-        start = 'F'+self.cell_start
-        end = 'F'+str(list_len+index) #index = client list lenght + previous client type start row
+        start = column+self.cell_start
+        end = column+str(list_len+index) #index = client list lenght + previous client type start row
         #print("start: ",start)
         #print('end: ',end)
         #print("index:" ,index)
         #print("list len: ",list_len)
-        for worksheet in workbook:
-            status =False
-            for cell_range in worksheet[start:end]:
-                if status == True:
-                    break
-                for cell in cell_range:
-                    if cell.value == None:
-                        remarks_list.append('')
-                    else:
-                        remarks_list.append(cell.value)
-            break
+        status =False
+        for cell_range in worksheet[start:end]:
+            if status == True:
+                break
+            for cell in cell_range:
+                if cell.value == None:
+                    remarks_list.append('')
+                else:
+                    remarks_list.append(cell.value)
             workbook.close()
         return remarks_list
 
@@ -92,7 +88,7 @@ class excel_parcer:
         x=0
         client = None
         self.count = count
-        #print(type(count))
+        #print(remarks_list)
         while x < int(self.count):
             temp_client = client_list[x]
             temp_bw = bw_list[x]
@@ -105,17 +101,15 @@ class excel_parcer:
         return client
 
     def upstream (self):
-         from openpyxl import load_workbook
-         import re
+
          upstream_in =  []
          upstream_out = []
          upstream_name = []
          total_bw = []
          columns = ["C","D","E","F"]
          #from openpyxl import load_workbook
-         workbook = load_workbook(filename = self.file)
-         sheets = workbook.sheetnames
-         sheet = sheets[0]
+         workbook = self.workbook
+         sheet = self.sheet
          ic_bw_sheet = workbook[sheet]
          for column in columns:
             start = column + self.cell_start
@@ -160,6 +154,19 @@ class excel_parcer:
 
 
 
+    def get_cell_value(self,cell_add):
+        workbook = self.workbook
+        sheet = self.sheet
+        worksheet = workbook[sheet]
+        cell = worksheet[cell_add]
+        cell_value = cell.value
+        return cell_value
+
+
+
+
+########################### end of Class #########################
+
 def total_bw(bw_list):
     total = 0
     for bw in bw_list:
@@ -171,7 +178,6 @@ def total_bw(bw_list):
 
 
 
-
 ########################################################################
 
 #enterprise Client
@@ -180,12 +186,12 @@ def total_bw(bw_list):
 filename ="IC-BW-Report.xlsx"
 
 ent_client_start_row = 11
-ent_client = excel_parcer(filename,str(ent_client_start_row),'500')
+ent_client = excel_parcer(filename,str(ent_client_start_row),'500',0)
 lsp_start_cell = ent_client.make_list_client()[1]
 ent_client_list = ent_client.make_list_client()[0]
 ent_client_bw = ent_client.make_list_bw()
 ent_total = total_bw (ent_client_bw)
-ent_client_remarks = ent_client.make_list_remarks(len(ent_client_list)+10,0)
+ent_client_remarks = ent_client.make_list_remarks(len(ent_client_list)+10,0,"F")
 ent_count=len(ent_client_list)
 ent_html = ent_client.make_html(ent_count,ent_client_list,ent_client_bw,ent_client_remarks)
 
@@ -195,12 +201,12 @@ ent_html = ent_client.make_html(ent_count,ent_client_list,ent_client_bw,ent_clie
 
 ########################################################################
 
-lsp_client = excel_parcer(filename,lsp_start_cell,'500')
+lsp_client = excel_parcer(filename,lsp_start_cell,'500',0)
 ggc_start_cell = lsp_client.make_list_client()[1]
 lsp_client_list = lsp_client.make_list_client()[0]
 lsp_client_bw = lsp_client.make_list_bw()
 lsp_total = total_bw (lsp_client_bw)
-lsp_client_remarks = lsp_client.make_list_remarks(len(lsp_client_list),ent_count+ent_client_start_row) #Enterprise start row number = 11
+lsp_client_remarks = lsp_client.make_list_remarks(len(lsp_client_list),ent_count+ent_client_start_row,"F") #Enterprise start row number = 11
 #print(lsp_client_remarks)
 lsp_count = len(lsp_client_list)
 lsp_html = lsp_client.make_html(lsp_count,lsp_client_list,lsp_client_bw,lsp_client_remarks)
@@ -211,11 +217,11 @@ lsp_html = lsp_client.make_html(lsp_count,lsp_client_list,lsp_client_bw,lsp_clie
 
 ########################################################################
 
-ggc_client = excel_parcer(filename,ggc_start_cell,'500')
+ggc_client = excel_parcer(filename,ggc_start_cell,'500',0)
 ggc_client_list = ggc_client.make_list_client()[0]
 ggc_client_bw = ggc_client.make_list_bw()
 ggc_total = total_bw (ggc_client_bw)
-ggc_client_remarks = ggc_client.make_list_remarks(len(ggc_client_list), lsp_count+int(lsp_start_cell))
+ggc_client_remarks = ggc_client.make_list_remarks(len(ggc_client_list), lsp_count+int(lsp_start_cell),"F")
 ggc_count = len(ggc_client_list)
 ggc_html = lsp_client.make_html(ggc_count,ggc_client_list,ggc_client_bw,ggc_client_remarks)
 
@@ -226,7 +232,7 @@ ggc_html = lsp_client.make_html(ggc_count,ggc_client_list,ggc_client_bw,ggc_clie
 
 ########################################################################
 
-upstream = excel_parcer(filename,"5",'6')
+upstream = excel_parcer(filename,"5",'6',0)
 upstream_list = upstream.upstream()
 up_html = upstream.upstream_html(upstream_list)
 
@@ -476,14 +482,159 @@ receiver_email = ["mosiur.rahman@novocom-bd.com","mosiur.rahman@brilliant.com.bd
 caption = ["core@brilliant.com.bd"]
 subject = "Bandwidth report"
 
-send_mail(sender_email,receiver_email,subject,caption,mail_body,filename)
-
+#send_mail(sender_email,receiver_email,subject,caption,mail_body,filename)
 
 
 
 
 ########################################################################
 
-#Bandwidth Report For NovoCom
+#Bandwidth Report For NovoCom ITC
 
 ########################################################################
+filename ="NovoCom-BW-Report.xlsx"
+iig_sheet_number = 1
+itc_sheet_number = 0
+
+###############   ITC Upstream   #######################################
+
+#ITC upstream started from row 5 and ended in row 7 need to change if anything changes
+
+itc_upstream = excel_parcer(filename,"5",'7',itc_sheet_number) #Filname to open, start row number, end row number, Worksheetnumber
+itc_upstream_list = itc_upstream.upstream()
+
+itc_upstream_html = itc_upstream.upstream_html(itc_upstream_list)
+
+
+###############   ITC Downstream  ##################################
+
+#ITC downstream started from row 9 and ended in row 9 need to change if anything changes
+
+
+itc_downstream = excel_parcer(filename,"9",'9',itc_sheet_number) #Filname to open, start row number, end row number, Worksheetnumber
+itc_downstream_list = itc_downstream.upstream() # output structure ([inbound,outbound,provider_name,Total])
+
+itc_downstream_list[0][0] = itc_upstream_list[0][0] + itc_upstream_list[0][1]
+itc_downstream_list[1][0] = itc_upstream_list[1][0] + itc_upstream_list[1][1]
+
+itc_downstream_list[1][0] = round(itc_downstream_list[1][0],2)
+
+itc_downstream_html = itc_downstream.upstream_html(itc_downstream_list)
+
+
+####################### Hosted Service #######################
+
+hosted_service = excel_parcer(filename,'11','13',itc_sheet_number)
+hosted_service_list = hosted_service.upstream()
+ggc_node_1_val_in = hosted_service.get_cell_value("L5")
+ggc_node_2_val_in = hosted_service.get_cell_value("L6")
+ggc_node_1_val_out = hosted_service.get_cell_value("M5")
+ggc_node_2_val_out = hosted_service.get_cell_value("M6")
+
+ggc_in = ggc_node_1_val_in + ggc_node_2_val_in
+ggc_out =  ggc_node_1_val_out + ggc_node_2_val_out
+
+hosted_service_list[0][2] = ggc_in
+hosted_service_list[1][2] = ggc_out
+
+hosted_service_html = hosted_service.upstream_html(hosted_service_list)
+
+
+
+####################### SG upstream #######################
+
+
+sg_upstream = excel_parcer(filename,"16",'19',itc_sheet_number) #Filname to open, start row number, end row number, Worksheetnumber
+sg_upstream_list = sg_upstream.upstream()
+
+sg_upstream_html = sg_upstream.upstream_html(sg_upstream_list)
+
+
+####################### SG Downstream #######################
+
+sg_downstream = excel_parcer(filename,"21",'24',itc_sheet_number) #Filname to open, start row number, end row number, Worksheetnumber
+sg_downstream_list = sg_downstream.upstream()
+
+sg_downstream_list[0][0] = itc_upstream_list[0][2]
+sg_downstream_list[1][0] = itc_upstream_list[1][2]
+
+novotel_iplc_in = hosted_service.get_cell_value("L25")
+novotel_iplc_out = hosted_service.get_cell_value("M25")
+novotel_sw_in = hosted_service.get_cell_value("L26")
+novotel_sw_out = hosted_service.get_cell_value("M26")
+
+novotel_sg_in = novotel_iplc_in + novotel_sw_in
+novotel_sg_out = novotel_iplc_out + novotel_sw_out
+
+sg_downstream_list[0][1] = itc_upstream_list[0][2]
+sg_downstream_list[1][1] = itc_upstream_list[1][2]
+
+sg_downstream_list[0][2] = novotel_sg_in
+sg_downstream_list[1][2] = novotel_sg_out
+
+sg_downstream_html = sg_downstream.upstream_html(sg_downstream_list)
+
+
+####################### UK upstream #######################
+
+
+uk_upstream = excel_parcer(filename,"27",'27',itc_sheet_number) #Filname to open, start row number, end row number, Worksheetnumber
+uk_upstream_list = uk_upstream.upstream()
+
+uk_upstream_html = uk_upstream.upstream_html(uk_upstream_list)
+
+
+####################### UK Downstream #######################
+
+
+uk_downstream = excel_parcer(filename,"29",'31',itc_sheet_number) #Filname to open, start row number, end row number, Worksheetnumber
+uk_downstream_list = uk_downstream.upstream()
+
+uk_downstream_list[0][0] = itc_upstream_list[0][1]
+uk_downstream_list[1][0] = itc_upstream_list[1][1]
+
+uk_downstream_html = uk_downstream.upstream_html(uk_downstream_list)
+
+
+########################################################################
+
+#Bandwidth Report For NovoCom IIG Client
+
+########################################################################
+
+
+
+client_start_row = 13
+iig_client = excel_parcer(filename,str(client_start_row),'500',iig_sheet_number)
+iig_client_list = iig_client.make_list_client()[0]
+intercloud_pos = iig_client_list.index("InterCloud")
+iig_client_bw = iig_client.make_list_bw()
+iig_total = total_bw (iig_client_bw) - iig_client_bw[intercloud_pos]
+iig_client_remarks = iig_client.make_list_remarks(len(iig_client_list)+10,2,"E")
+iig_count=len(iig_client_list)
+iig_client_html = iig_client.make_html(iig_count,iig_client_list,iig_client_bw,iig_client_remarks)
+
+
+########################################################################
+
+#Bandwidth Report For NovoCom IIG Upstream
+
+########################################################################
+
+iig_upstream = excel_parcer(filename,"7",'9',iig_sheet_number) #Filname to open, start row number, end row number, Worksheetnumber
+iig_upstream_list = iig_upstream.upstream()
+
+iig_upstream_list[0][0]=itc_downstream_list[0][0]
+iig_upstream_list[1][0]=itc_downstream_list[1][0]
+
+iig_upstream_list[0][2]=itc_upstream_list[0][2]
+iig_upstream_list[1][2]=itc_upstream_list[1][2]
+
+iig_upstream_html = iig_upstream.upstream_html(upstream_list)
+
+
+
+#TODO: Create HTML body for the IIG and itc_upstream
+#TODO: Send Mail
+#TODO: check all the recepents got all the mail_body
+#TODO: update bandwidth report as per script
