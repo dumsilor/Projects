@@ -4,6 +4,7 @@
 
 ########################################################################
 from openpyxl import load_workbook
+import os
 
 class excel_parcer:
 
@@ -11,6 +12,7 @@ class excel_parcer:
         self.file = file
         self.cell_start = cell_start
         self.cell_end = cell_end
+        os.chdir("/shared/Bandwidth Report")
         workbook = load_workbook(filename = self.file)
         self.workbook = workbook
         sheets = workbook.sheetnames
@@ -273,34 +275,42 @@ class send_mail:
         # The email client will try to render the last part first
         #message.attach(part1)
         message.attach(part2)
+        if filename == "":
+            text = message.as_string()
+            context = ssl.create_default_context()
+            with smtplib.SMTP_SSL("mta.brilliant.com.bd", 465, context=context) as server:
+                server.login(sender, password)
+                server.sendmail(
+                    sender, receiver_list + caption ,text
+                )
+        else:
+            with open(filename, "rb") as attachment:
+                # Add file as application/octet-stream
+                # Email client can usually download this automatically as attachment
+                part = MIMEBase("application", "octet-stream")
+                part.set_payload(attachment.read())
 
-        with open(filename, "rb") as attachment:
-            # Add file as application/octet-stream
-            # Email client can usually download this automatically as attachment
-            part = MIMEBase("application", "octet-stream")
-            part.set_payload(attachment.read())
+                # Encode file in ASCII characters to send by email
+            encoders.encode_base64(part)
 
-        # Encode file in ASCII characters to send by email
-        encoders.encode_base64(part)
-
-        # Add header as key/value pair to attachment part
-        part.add_header(
+                # Add header as key/value pair to attachment part
+            part.add_header(
             "Content-Disposition",
             f"attachment; filename= {filename}",
-        )
-
-        # Add attachment to message and convert message to string
-        message.attach(part)
-        text = message.as_string()
-
-
-        # Create secure connection with server and send email
-        context = ssl.create_default_context()
-        with smtplib.SMTP_SSL("mta.brilliant.com.bd", 465, context=context) as server:
-            server.login(sender, password)
-            server.sendmail(
-                sender, receiver_list,text
             )
+
+                # Add attachment to message and convert message to string
+            message.attach(part)
+            text = message.as_string()
+
+
+                # Create secure connection with server and send email
+            context = ssl.create_default_context()
+            with smtplib.SMTP_SSL("mta.brilliant.com.bd", 465, context=context) as server:
+                server.login(sender, password)
+                server.sendmail(
+                sender, receiver_list + caption ,text
+                )
 
 
 
@@ -323,10 +333,9 @@ from datetime import date, timedelta
 yesterday = date.today() - timedelta(days=1)
 date = yesterday.strftime('%d/%m/%y')
 
-name = ""#input("Please Enter Shift Engineer Name: ")
+name = input("Please Enter Shift Engineer Name: ")
 
-fname = "table.html"
-fhandle = open(fname, "w")
+
 mail_body = """
 <html>
     <head>
@@ -350,7 +359,7 @@ mail_body = """
             }
 
             #report_head, #date {
-            font-size:150%;
+            font-size:130%;
             color: #800000;
             background : #999966
             }
@@ -389,8 +398,8 @@ mail_body = """
                     <th>Sr. Number</th>
                     <th>Upstream Name</th>
                     <th>Total Capacity(Mbps)</th>
-                    <th>Highest Bandwidth IN(Mpbs)</th>
-                    <th>Highest Bandwidth Out(Mpbs)</th>
+                    <th>Highest Bandwidth IN(Mbps)</th>
+                    <th>Highest Bandwidth Out(Mbps)</th>
                     <th>Utilization IN (%) </th>
                     <th>Utilization OUT (%) </th>
                     <th>Remarks</th>
@@ -467,9 +476,9 @@ mail_body = """
     </body>
 </html>"""
 
-#print(mail_body)
-#fhandle.write(mail_body)
-#fhandle.close()
+
+
+
 
 
 ########################################################################
@@ -477,14 +486,16 @@ mail_body = """
 #Creating Tunnel and Sending Mail For Intercloud
 
 ########################################################################
+print ("Sending IntrtCloud Report")
 sender_email = "core@brilliant.com.bd"
-receiver_email = ["mosiur.rahman@novocom-bd.com","mosiur.rahman@brilliant.com.bd"]
-caption = ["core@brilliant.com.bd"]
-subject = "Bandwidth report"
+receiver_email = ["revenue.assurance@intercloud.com.bd","info@intercloud.com.bd","bivabory.nayana@intercloud.com.bd","s.hossain@intercloud.com.bd"]
+caption = ["core@brilliant.com.bd","noc@brilliant.com.bd"]
+subject = "Bandwidth Utilization Report of Intercloud"
 
-#send_mail(sender_email,receiver_email,subject,caption,mail_body,filename)
+send_mail(sender_email,receiver_email,subject,caption,mail_body,filename)
 
 
+print("InterCloud Report sent Successfully!")
 
 
 ########################################################################
@@ -632,9 +643,362 @@ iig_upstream_list[1][2]=itc_upstream_list[1][2]
 
 iig_upstream_html = iig_upstream.upstream_html(upstream_list)
 
+########################################################################
+
+#Creating HTML for NovoCom IIG
+
+########################################################################
 
 
-#TODO: Create HTML body for the IIG and itc_upstream
-#TODO: Send Mail
-#TODO: check all the recepents got all the mail_body
-#TODO: update bandwidth report as per script
+iig_body = """
+<html>
+    <head>
+        <style>
+            table {
+            padding: 0 20px 0 20px;
+            }
+            tr, td, th { border: 1px solid black;
+                         text-align: center;
+                         padding: 15px;
+                          }
+            #date {
+            width: 10%;
+            }
+
+
+            .table_head {
+            background: #a3a375;
+            color: #800000;
+            font-size: 120%;
+            }
+
+            #report_head, #date {
+            font-size:130%;
+            color: #800000;
+            background : #999966
+            }
+            #date {
+            font-size:100%;
+            }
+            .objects {
+            background : #d6d6c2
+            }
+            .head {
+            background-color:#c1c1a4;
+            }
+            .total {
+            font-weight: bold;
+            background : #d6d6c2
+            }
+        </style>
+    </head>
+    <body>
+        <p> Dear Sir, <br>
+        <br>
+        Kindly find the attached mail for NovoCom IIG Bandwidth report:
+        </p>
+        <table>
+            <thead>
+                <tr>
+                    <th id=date>"""+date+"""</th>
+                    <th id=report_head colspan ="7"> NovoCom IIG Bandwidth Report</th>
+                </tr>
+
+                <tr>
+                    <th colspan="8" class ="Table_head">Upstream</th>
+                </tr>
+
+                <tr class=head>
+                    <th>Sr. Number</th>
+                    <th>Upstream Name</th>
+                    <th>Total Capacity(Mbps)</th>
+                    <th>Highest Bandwidth IN(Mbps)</th>
+                    <th>Highest Bandwidth Out(Mbps)</th>
+                    <th>Utilization IN (%) </th>
+                    <th>Utilization OUT (%) </th>
+                    <th>Remarks</th>
+                </tr>
+
+                """+iig_upstream_html+"""
+
+                <tr>
+                    <th colspan="8" class ="Table_head">Client</th>
+                </tr>
+                <tr class=head>
+                    <th>Sr. Number</th>
+                    <th>Name</th>
+                    <th>Bandwidth</th>
+                    <th colspan='5'>Remarks</th>
+                </tr>
+            </thead>
+            <tbody>""" + iig_client_html + """
+            <tr class = 'total'>
+                <td colspan ='2'>Total [excluding InterCloud] : </td>
+                <td>"""+ str(iig_total) + """</td>
+                <td colspan ='5'> </td>
+            </tr>
+            </tbody>
+        </table>
+        <br>
+        <br>
+        <p>Regards,</p>
+        <br>
+        <p>""" + name + """</p>
+        <p><b>IIG NOC || AS58923</b></p>
+        <p><b>Internet Service Provider (ISP) & IP Telephony Service Provider (IPTSP)</b></p>
+        <p>House: Ga-30/G, Pragati Sarani, Shahjadpur, Gulshan-2, Dhaka – 1212, Bangladesh</p>
+        <p><b>phone:</b>  +8809638383838; Ext: 8426, 8427</p>
+    </body>
+</html>"""
+
+#fname = "table.html"
+#fhandle = open(fname, "w")
+
+########################################################################
+
+#Creating HTML for NovoCom ITC
+
+########################################################################
+
+
+itc_body = """
+<html>
+    <head>
+        <style>
+            table {
+            padding: 0 20px 0 20px;
+            }
+            tr, td, th { border: 1px solid black;
+                         text-align: center;
+                         padding: 15px;
+                          }
+            #date {
+            width: 10%;
+            }
+
+
+            .table_head {
+            background: #a3a375;
+            color: #800000;
+            font-size: 120%;
+            }
+
+            #report_head, #date {
+            font-size:130%;
+            color: #800000;
+            background : #999966
+            }
+            #date {
+            font-size:100%;
+            }
+            .objects {
+            background : #d6d6c2
+            }
+            .head {
+            background-color:#c1c1a4;
+            }
+            .total {
+            font-weight: bold;
+            background : #d6d6c2
+            }
+        </style>
+    </head>
+    <body>
+        <p> Dear Sir, <br>
+        <br>
+        Kindly find the attached mail for NovoCom ITC Bandwidth report:
+        </p>
+        <table>
+            <thead>
+                <tr>
+                    <th id=date>"""+date+"""</th>
+                    <th id=report_head colspan ="7"> NovoCom Limited - ITC</th>
+                </tr>
+
+                <tr>
+                    <th colspan="8" class ="Table_head">Upstream</th>
+                </tr>
+
+                <tr class=head>
+                    <th>Sr. Number</th>
+                    <th>Upstream Name</th>
+                    <th>Total Capacity(Mbps)</th>
+                    <th>Highest Bandwidth IN(Mbps)</th>
+                    <th>Highest Bandwidth Out(Mbps)</th>
+                    <th>Utilization IN (%) </th>
+                    <th>Utilization OUT (%) </th>
+                    <th>Remarks</th>
+                </tr>
+                """+itc_upstream_html+ """
+
+                <tr>
+                    <th colspan="8" class ="Table_head">Downstream</th>
+                </tr>
+
+                <tr class=head>
+                    <th>Sr. Number</th>
+                    <th>Upstream Name</th>
+                    <th>Total Capacity(Mbps)</th>
+                    <th>Highest Bandwidth IN(Mbps)</th>
+                    <th>Highest Bandwidth Out(Mbps)</th>
+                    <th>Utilization IN (%) </th>
+                    <th>Utilization OUT (%) </th>
+                    <th>Remarks</th>
+                </tr>
+                """+itc_downstream_html +"""
+
+                <tr>
+                    <th id=report_head colspan ="8"> NovoCom Limited - Singapore</th>
+                </tr>
+
+                <tr>
+                    <th colspan="8" class ="Table_head">Upstream</th>
+                </tr>
+
+                <tr class=head>
+                    <th>Sr. Number</th>
+                    <th>Upstream Name</th>
+                    <th>Total Capacity(Mbps)</th>
+                    <th>Highest Bandwidth IN(Mbps)</th>
+                    <th>Highest Bandwidth Out(Mbps)</th>
+                    <th>Utilization IN (%) </th>
+                    <th>Utilization OUT (%) </th>
+                    <th>Remarks</th>
+                </tr>
+                """+sg_upstream_html+ """
+
+                <tr>
+                    <th colspan="8" class ="Table_head">Downstream</th>
+                </tr>
+
+                <tr class=head>
+                    <th>Sr. Number</th>
+                    <th>Upstream Name</th>
+                    <th>Total Capacity(Mbps)</th>
+                    <th>Highest Bandwidth IN(Mbps)</th>
+                    <th>Highest Bandwidth Out(Mbps)</th>
+                    <th>Utilization IN (%) </th>
+                    <th>Utilization OUT (%) </th>
+                    <th>Remarks</th>
+                </tr>
+                """+sg_downstream_html +"""
+
+                <tr>
+                    <th id=report_head colspan ="8"> NovoCom Limited - UK</th>
+                </tr>
+
+                <tr>
+                    <th colspan="8" class ="Table_head">Upstream</th>
+                </tr>
+
+                <tr class=head>
+                    <th>Sr. Number</th>
+                    <th>Upstream Name</th>
+                    <th>Total Capacity(Mbps)</th>
+                    <th>Highest Bandwidth IN(Mbps)</th>
+                    <th>Highest Bandwidth Out(Mbps)</th>
+                    <th>Utilization IN (%) </th>
+                    <th>Utilization OUT (%) </th>
+                    <th>Remarks</th>
+                </tr>
+                """+uk_upstream_html+ """
+
+                <tr>
+                    <th colspan="8" class ="Table_head">Downstream</th>
+                </tr>
+
+                <tr class=head>
+                    <th>Sr. Number</th>
+                    <th>Upstream Name</th>
+                    <th>Total Capacity(Mbps)</th>
+                    <th>Highest Bandwidth IN(Mbps)</th>
+                    <th>Highest Bandwidth Out(Mbps)</th>
+                    <th>Utilization IN (%) </th>
+                    <th>Utilization OUT (%) </th>
+                    <th>Remarks</th>
+                </tr>
+                """+uk_downstream_html +"""
+                </tbody>
+            </table>
+            <br>
+            <br>
+            <p>Regards,</p>
+            <br>
+            <p>""" + name + """</p>
+            <p><b>IP Support NOC || AS132267</b></p>
+            <p><b>Internet Service Provider (ISP) & IP Telephony Service Provider (IPTSP)</b></p>
+            <p>House: Ga-30/G, Pragati Sarani, Shahjadpur, Gulshan-2, Dhaka – 1212, Bangladesh</p>
+            <p><b>phone:</b>  +8809638383838; Ext: 8426, 8427</p>
+        </body>
+    </html>"""
+#print(mail_body)
+#fhandle.write(itc_body)
+#fhandle.close()
+
+########################################################################
+
+#Send Mail for NovoCom IIG
+
+########################################################################
+print ("Sending IIG Report")
+
+sender_email = "noc.iig@novocom-bd.com"
+receiver_email = ["info@novocom-bd.com","bivabory@novocom-bd.com","s.hossain@novocom-bd.com","revenue.assurance@novocom-bd.com"]
+caption = [sender_email]
+subject = "Bandwidth Utilization Report of NovoCom IIG"
+
+send_mail(sender_email,receiver_email,subject,caption,iig_body,filename)
+print("IIG Report sent Successfully!")
+
+########################################################################
+
+#Send Mail for NovoCom ITC
+
+########################################################################
+print ("Sending ITC Report")
+
+sender_email = "ipsupport@novocom-bd.com"
+["info@novocom-bd.com","bivabory@novocom-bd.com","s.hossain@novocom-bd.com","revenue.assurance@novocom-bd.com"]
+caption = [sender_email]
+subject = "Bandwidth Utilization Report of NovoCom ITC"
+
+send_mail(sender_email,receiver_email,subject,caption,itc_body,filename)
+
+
+print("ITC Report sent Successfully!")
+
+########################################################################
+
+#Send Mail for NovoTel
+
+########################################################################
+filename = ""
+nv_body = """'
+<html>
+    <body>
+        <p>Dear Team, </p>
+        <p> Kindly find the Internet Bandwidth utilization by NovoTel in Singapore and UK on """+date+""" as follows- </p>
+        <p>Singapore Internet used by NovoTel = """+ str(sg_downstream_list[1][2])+ """ Mbps</p>
+        <p>UK Internet used by NovoTel = """+ str(uk_downstream_list[1][1])+ """ Mbps</p>
+        <p>Please note that the amount shared above is 80% accurate.</p>
+        <br>
+        <p>Regards, </p>
+        <p>""" +name+"""</p>
+        <br>
+        <p> IP NOC</p>
+        <p> NovoTel  Limited</p>
+        <p>House No. Ga-30/G, Pragati Sarani, Shahjadpur, Gulshan-2, Dhaka-1212, Bangladesh.</p>
+        <p> 24X7 Hotline:+8801787681191 || ipsupport@novotel-bd.com || www.novotel-bd.com</p>
+    </body>
+</html>
+"""
+
+print ("Sending Novotel Report")
+
+sender_email = "ipsupport@novocom-bd.com"
+receiver_email = ["noc@novotel-bd.com"]
+caption = [sender_email, "ipsupport@novotel-bd.com"]
+subject = "NovoTel Internet BW Utilization || " + date
+
+send_mail(sender_email,receiver_email,subject,caption,nv_body,filename)
+print("Novotel Report sent Successfully!")
