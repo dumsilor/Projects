@@ -1,0 +1,41 @@
+[
+{"type":"header","version":"4.9.5","comment":"Export to JSON plugin for PHPMyAdmin"},
+{"type":"database","name":"pop_database"},
+{"type":"table","name":"routers","database":"pop_database","data":
+[
+{"router_id":"1","name":"Airport RTR","loopback_ip_add":"163.53.149.56","location":"Airport","vendor":"Mikrotik","device_model":"CCR-1016-12G","number_of_port":"12","number_of_sfp":"4","last_changed":"","last_backup":"","OS_version":"6.63","user":"admin","pass":""},
+{"router_id":"3","name":"BDIX Router","loopback_ip_add":"118.67.208.2","location":"Colocity","vendor":"Mikrotik","device_model":"CCR1036-12G-4S","number_of_port":"12","number_of_sfp":"4","last_changed":"","last_backup":"","OS_version":"6.37.4","user":null,"pass":null},
+{"router_id":"4","name":"BTRC PoP","loopback_ip_add":"103.23.40.59","location":"BTRC Office","vendor":"Mikrotik","device_model":"RB3011UiAS","number_of_port":"10","number_of_sfp":"1","last_changed":"","last_backup":"","OS_version":"6.38.1","user":null,"pass":null},
+{"router_id":"5","name":"Banani RTR","loopback_ip_add":"103.23.40.59","location":"NovoAir Office","vendor":"Mikrotik","device_model":"CCR1016-12G","number_of_port":"12","number_of_sfp":"0","last_changed":"","last_backup":"","OS_version":"6.19","user":null,"pass":null},
+{"router_id":"6","name":"Baridhara DOHS RTR","loopback_ip_add":"103.23.40.25","location":"Baridhara DOHS","vendor":"Mikrotik","device_model":"RB3011UiAS","number_of_port":"10","number_of_sfp":"1","last_changed":"","last_backup":"","OS_version":"6.35.4","user":null,"pass":null},
+{"router_id":"7","name":"Bashundhara RTR","loopback_ip_add":"103.248.12.18","location":"Bashundhara","vendor":"Mikrotik","device_model":"CCR1016-12G","number_of_port":"12","number_of_sfp":"0","last_changed":"","last_backup":"","OS_version":"6.19","user":null,"pass":null},
+{"router_id":"8","name":"Benapole RTR","loopback_ip_add":"103.23.40.15","location":"Benapole","vendor":"Mikrotik","device_model":"CCR1016-12G","number_of_port":"12","number_of_sfp":"0","last_changed":"","last_backup":"","OS_version":"6.40.7","user":null,"pass":null},
+{"router_id":"9","name":"Bogra RTR","loopback_ip_add":"103.23.40.6","location":"Bogra","vendor":"Mikrotik","device_model":"CCR1016-12G","number_of_port":"12","number_of_sfp":"0","last_changed":"","last_backup":"","OS_version":"6.42.10","user":null,"pass":null},
+{"router_id":"10","name":"Chottogram Press Club","loopback_ip_add":"103.23.40.8","location":"Chottogram","vendor":"Mikrotik","device_model":"CCR1016-12G","number_of_port":"12","number_of_sfp":"0","last_changed":"","last_backup":"","OS_version":"6.34.3","user":null,"pass":null},
+{"router_id":"11","name":"Chottogram Saint Martin Agrabad","loopback_ip_add":"103.23.40.1","location":"Chottogram","vendor":"Mikrotik","device_model":"CCR1016-12G","number_of_port":"12","number_of_sfp":"0","last_changed":"","last_backup":"","OS_version":"6.19","user":null,"pass":null},
+{"router_id":"12","name":"Coloasia RTR","loopback_ip_add":"103.248.12.6","location":"Coloasia","vendor":"Mikrotik","device_model":"CCR1016-12G","number_of_port":"12","number_of_sfp":"0","last_changed":"","last_backup":"","OS_version":"6.19","user":null,"pass":null},
+{"router_id":"13","name":"Colocity Old NNI RTR","loopback_ip_add":"103.248.12.27","location":"Colocity Datacenter","vendor":"Mikrotik","device_model":"CCR1016-12G","number_of_port":"12","number_of_sfp":"0","last_changed":"","last_backup":"","OS_version":"6.23","user":null,"pass":null},
+{"router_id":"14","name":"Colocity New NNI","loopback_ip_add":"118.67.208.13","location":"Colocity Datacenter New ISP Rack","vendor":"Mikrotik","device_model":"CCR1036-12G-4S","number_of_port":"12","number_of_sfp":"4","last_changed":"","last_backup":"","OS_version":"6.46.5","user":null,"pass":null},
+{"router_id":"15","name":"Colocity New NNI 2","loopback_ip_add":"118.67.208.20","location":"Colocity Datacenter New ISP Rack","vendor":"Cisco","device_model":"ASR-920-24TZ-M","number_of_port":"24","number_of_sfp":"4","last_changed":"","last_backup":"","OS_version":"IOS XE v16.08.01b","user":null,"pass":null},
+{"router_id":"16","name":"Colocity Aggregation RTR","loopback_ip_add":"103.248.12.2","location":"Colocity Datacenter","vendor":"Mikrotik","device_model":"CCR1036-12G-4S","number_of_port":"12","number_of_sfp":"4","last_changed":"","last_backup":"","OS_version":"6.47.3","user":null,"pass":null},
+{"router_id":"17","name":"Colocity Aggregation RTR 2","loopback_ip_add":"103.23.40.9","location":"Colocity Datacenter","vendor":"Mikrotik","device_model":"CCR1036-12G-4S","number_of_port":"12","number_of_sfp":"4","last_changed":"","last_backup":"","OS_version":"6.47.1","user":null,"pass":null},
+{"router_id":"18","name":"Colocity ASR9K","loopback_ip_add":"103.248.12.30","location":"Colocity Datacenter New ISP Rack","vendor":"Cisco","device_model":"ASR-9001","number_of_port":"0","number_of_sfp":"12","last_changed":"","last_backup":"","OS_version":"IOS XR v5.2.2","user":"root","pass":""},
+{"router_id":"20","name":"Cox's Bazar RTR","loopback_ip_add":"103.248.12.24","location":"Cox's Bazar","vendor":"Mikrotik","device_model":"CCR1036-12G-4S","number_of_port":"12","number_of_sfp":"4","last_changed":"","last_backup":"","OS_version":"6.19","user":"admin","pass":""},
+{"router_id":"21","name":"Core Wifi Mikrotik","loopback_ip_add":"163.53.150.254","location":"4th floor NOC room on IIG PC","vendor":"Mikrotik","device_model":"RB2011 2HnD ","number_of_port":"8","number_of_sfp":"0","last_changed":"","last_backup":"","OS_version":"","user":"admin","pass":""},
+{"router_id":"22","name":"Dhanmondi RTR","loopback_ip_add":"103.248.12.22","location":"Dhanmondi","vendor":"Mikrotik","device_model":"CCR1016-12G","number_of_port":"12","number_of_sfp":"0","last_changed":"","last_backup":"","OS_version":"6.19","user":"admin","pass":""},
+{"router_id":"23","name":"GGC\/Akamai RTR","loopback_ip_add":"103.23.40.85","location":"Colocity ISP New Rack","vendor":"Mikrotik","device_model":"CCR1072-1G-8S+","number_of_port":"1","number_of_sfp":"8","last_changed":"","last_backup":"","OS_version":"6.38.5","user":"admin","pass":""},
+{"router_id":"24","name":"Gazi TV 1","loopback_ip_add":"103.248.12.26","location":"Gazi Television","vendor":"Mikrotik","device_model":"CCR1036-12G-4S","number_of_port":"12","number_of_sfp":"4","last_changed":"","last_backup":"","OS_version":"6.43.13","user":"admin","pass":""},
+{"router_id":"25","name":"Gazi TV 2","loopback_ip_add":"103.23.40.11","location":"Gazi Television","vendor":"Mikrotik","device_model":"RB3011UiAS","number_of_port":"10","number_of_sfp":"1","last_changed":"","last_backup":"","OS_version":"6.35.4","user":"admin","pass":""},
+{"router_id":"26","name":"Gazi TV 3","loopback_ip_add":"103.23.40.17","location":"Gazi Television","vendor":"Mikrotik","device_model":"RB2011UiAS","number_of_port":"10","number_of_sfp":"1","last_changed":"","last_backup":"","OS_version":"6.35.4","user":"admin","pass":""},
+{"router_id":"27","name":"Gulshan 1 RTR","loopback_ip_add":"103.248.12.17","location":"Gulshan","vendor":"Mikrotik","device_model":"CCR1016-12G","number_of_port":"12","number_of_sfp":"0","last_changed":"","last_backup":"","OS_version":"6.44.1","user":"admin","pass":""},
+{"router_id":"28","name":"Gulshan 2 RTR","loopback_ip_add":"103.248.12.13","location":"Gulshan","vendor":"Mikroitk","device_model":"CCR1016-12G","number_of_port":"12","number_of_sfp":"0","last_changed":"","last_backup":"","OS_version":"6.19","user":"admin","pass":""},
+{"router_id":"29","name":"IDB RTR","loopback_ip_add":"163.53.149.58","location":"IDB","vendor":"Mikrotik","device_model":"CCR1016-12G","number_of_port":"12","number_of_sfp":"0","last_changed":"","last_backup":"","OS_version":"6.23","user":"admin","pass":""},
+{"router_id":"30","name":"IDB Wifi RTR","loopback_ip_add":"118.67.223.190","location":"BCIC Bhaban","vendor":"Mikrotik","device_model":"CCR1016-12S-1S+","number_of_port":"0","number_of_sfp":"13","last_changed":"","last_backup":"","OS_version":"6.35.2","user":"admin","pass":""}
+]
+}
+,{"type":"table","name":"switches","database":"pop_database","data":
+[
+{"switch_id":"1","switch_name":"Dlink","switch_ip":"172.17.1.12","vlan_range":"1-10","vendor":"Dlink","model":"1210","os_version":"927","username":"admin","pass":"ch@rp0tr0"}
+]
+}
+]

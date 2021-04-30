@@ -1,0 +1,661 @@
+		define host{ 
+
+                              use:        client
+                              host_name   PCCW030-CPE-Loopback
+                              alias       PCCW030-CPE-Loopback
+                              address     103.23.40.0
+        }define host{ 
+
+                              use:        client
+                              host_name   PCCW030-CPE-Loopback
+                              alias       PCCW030-CPE-Loopback
+                              address     103.23.40.0
+        }define host{ 
+
+                              use:        backbone
+                              host_name   Saint-Martin-Agrabad-PoP-Loopback
+                              alias       Saint-Martin-Agrabad-PoP-Loopback
+                              address     103.23.40.1
+        }define host{ 
+
+                              use:        backbone
+                              host_name   Khulna-PoP-Loopback
+                              alias       Khulna-PoP-Loopback
+                              address     103.23.40.2
+        }define host{ 
+
+                              use:        backbone
+                              host_name   Shymoli-PoP-Loopback
+                              alias       Shymoli-PoP-Loopback
+                              address     103.23.40.3
+        }define host{ 
+
+                              use:        backbone
+                              host_name   Shahjadpur-NNI-Mikrotik-Loopback
+                              alias       Shahjadpur-NNI-Mikrotik-Loopback
+                              address     103.23.40.4
+        }define host{ 
+
+                              use:        backbone
+                              host_name   Bogra-PoP-Loopback
+                              alias       Bogra-PoP-Loopback
+                              address     103.23.40.6
+        }define host{ 
+
+                              use:        backbone
+                              host_name   Colocity-NNI-RTR-Loopback
+                              alias       Colocity-NNI-RTR-Loopback
+                              address     103.23.40.7
+        }define host{ 
+
+                              use:        backbone
+                              host_name   CTG-Press-Club-PoP-Loopback
+                              alias       CTG-Press-Club-PoP-Loopback
+                              address     103.23.40.8
+        }define host{ 
+
+                              use:        backbone
+                              host_name   Colocity-Agg-2-Loopback
+                              alias       Colocity-Agg-2-Loopback
+                              address     103.23.40.9
+        }define host{ 
+
+                              use:        backbone
+                              host_name   Coloicity-Core-2-RR2-Loopback
+                              alias       Coloicity-Core-2-RR2-Loopback
+                              address     103.23.40.10
+        }define host{ 
+
+                              use:        backbone
+                              host_name   Gazi-TV-2-Loopback
+                              alias       Gazi-TV-2-Loopback
+                              address     103.23.40.11
+        }define host{ 
+
+                              use:        client
+                              host_name   Four-Points-CPE-Loopback
+                              alias       Four-Points-CPE-Loopback
+                              address     103.23.40.13
+        }define host{ 
+
+                              use:        backbone
+                              host_name   Jessore-PoP-Loopback
+                              alias       Jessore-PoP-Loopback
+                              address     103.23.40.14
+        }define host{ 
+
+                              use:        backbone
+                              host_name   Benapole-PoP-Loopback
+                              alias       Benapole-PoP-Loopback
+                              address     103.23.40.15
+        }define host{ 
+
+                              use:        backbone
+                              host_name   Patuakhali-PoP-Loopback
+                              alias       Patuakhali-PoP-Loopback
+                              address     103.23.40.16
+        }define host{ 
+
+                              use:        backbone
+                              host_name   Gazi-TV-3-Loopback
+                              alias       Gazi-TV-3-Loopback
+                              address     103.23.40.17
+        }define host{ 
+
+                              use:        client
+                              host_name   Islam-Garmets-Konabari-CPE-Loopback
+                              alias       Islam-Garmets-Konabari-CPE-Loopback
+                              address     103.23.40.18
+        }define host{ 
+
+                              use:        client
+                              host_name   Islam-Garments-Gulshan-CPE-Loopback
+                              alias       Islam-Garments-Gulshan-CPE-Loopback
+                              address     103.23.40.19
+        }define host{ 
+
+                              use:        backbone
+                              host_name   Navana-PoP-Loopback
+                              alias       Navana-PoP-Loopback
+                              address     103.23.40.20
+        }define host{ 
+
+                              use:        client
+                              host_name   Blue-Gold-Khulna-CPE-Loopback
+                              alias       Blue-Gold-Khulna-CPE-Loopback
+                              address     103.23.40.21
+        }define host{ 
+
+                              use:        client
+                              host_name   Tusuka-Chairman-Sir-Mother-Residence-CPE-Loopback
+                              alias       Tusuka-Chairman-Sir-Mother-Residence-CPE-Loopback
+                              address     103.23.40.22
+        }define host{ 
+
+                              use:        client
+                              host_name   Novotel-CPE-New-Loopback
+                              alias       Novotel-CPE-New-Loopback
+                              address     103.23.40.24
+        }define host{ 
+
+                              use:        backbone
+                              host_name   Baridhara-PoP-Loopback
+                              alias       Baridhara-PoP-Loopback
+                              address     103.23.40.25
+        }define host{ 
+
+                              use:        client
+                              host_name   PCCW022-PY-Garmnets-Comilla-CPE-Loopback
+                              alias       PCCW022-PY-Garmnets-Comilla-CPE-Loopback
+                              address     103.23.40.26
+        }define host{ 
+
+                              use:        backbone
+                              host_name   Shahjadpur-PoP-Rotuer-3-Loopback
+                              alias       Shahjadpur-PoP-Rotuer-3-Loopback
+                              address     103.23.40.27
+        }define host{ 
+
+                              use:        client
+                              host_name   Blue-Gold-Motijheel-CPE-Loopback
+                              alias       Blue-Gold-Motijheel-CPE-Loopback
+                              address     103.23.40.29
+        }define host{ 
+
+                              use:        backbone
+                              host_name   Khulna-PoP-Router-2-Loopback
+                              alias       Khulna-PoP-Router-2-Loopback
+                              address     103.23.40.30
+        }define host{ 
+
+                              use:        client
+                              host_name   Asiatic-Minor-CPE-Loopback
+                              alias       Asiatic-Minor-CPE-Loopback
+                              address     103.23.40.33
+        }define host{ 
+
+                              use:        backbone
+                              host_name   Mirpur-DOHS-Md-Sir-Res-PoP-Loopback
+                              alias       Mirpur-DOHS-Md-Sir-Res-PoP-Loopback
+                              address     103.23.40.34
+        }define host{ 
+
+                              use:        backbone
+                              host_name   Saidpur-PoP-Loopback
+                              alias       Saidpur-PoP-Loopback
+                              address     103.23.40.35
+        }define host{ 
+
+                              use:        client
+                              host_name   BIDRAL-Bangladesh-Rating-Agency-CPE-Loopback
+                              alias       BIDRAL-Bangladesh-Rating-Agency-CPE-Loopback
+                              address     103.23.40.36
+        }define host{ 
+
+                              use:        backbone
+                              host_name   Mirpur-11-PoP-Loopback
+                              alias       Mirpur-11-PoP-Loopback
+                              address     103.23.40.37
+        }define host{ 
+
+                              use:        client
+                              host_name   Reed-CPE-Loopback
+                              alias       Reed-CPE-Loopback
+                              address     103.23.40.38
+        }define host{ 
+
+                              use:        backbone
+                              host_name   Savar-PoP-Loopback
+                              alias       Savar-PoP-Loopback
+                              address     103.23.40.40
+        }define host{ 
+
+                              use:        client
+                              host_name   Nothend-CE-Ukhiya-Loopback
+                              alias       Nothend-CE-Ukhiya-Loopback
+                              address     103.23.40.41
+        }define host{ 
+
+                              use:        client
+                              host_name   Giz-CPE-Loopback
+                              alias       Giz-CPE-Loopback
+                              address     103.23.40.42
+        }define host{ 
+
+                              use:        client
+                              host_name   DGFI-DG-Residence-Loopback
+                              alias       DGFI-DG-Residence-Loopback
+                              address     103.23.40.43
+        }define host{ 
+
+                              use:        client
+                              host_name   Le-Meredian-IPTSP-New-Loopback
+                              alias       Le-Meredian-IPTSP-New-Loopback
+                              address     103.23.40.44
+        }define host{ 
+
+                              use:        client
+                              host_name   Edison-CPE-Loopback
+                              alias       Edison-CPE-Loopback
+                              address     103.23.40.45
+        }define host{ 
+
+                              use:        client
+                              host_name   CEO-Sir-Res-Loopback
+                              alias       CEO-Sir-Res-Loopback
+                              address     103.23.40.46
+        }define host{ 
+
+                              use:        client
+                              host_name   Bantel-CPE-Loopback
+                              alias       Bantel-CPE-Loopback
+                              address     103.23.40.47
+        }define host{ 
+
+                              use:        client
+                              host_name   CEO-Sir-Second-Loopback-For-gatekeepers
+                              alias       CEO-Sir-Second-Loopback-For-gatekeepers
+                              address     103.23.40.48
+        }define host{ 
+
+                              use:        client
+                              host_name   Chevron-Dhaka-Office-CPE-1-Loopback
+                              alias       Chevron-Dhaka-Office-CPE-1-Loopback
+                              address     103.23.40.50
+        }define host{ 
+
+                              use:        client
+                              host_name   Chevron-Dhaka-Office-CPE-2-Loopback
+                              alias       Chevron-Dhaka-Office-CPE-2-Loopback
+                              address     103.23.40.51
+        }define host{ 
+
+                              use:        client
+                              host_name   Chevron-Sylhet-Office-Lackatoora-CPE-1-Loopback
+                              alias       Chevron-Sylhet-Office-Lackatoora-CPE-1-Loopback
+                              address     103.23.40.52
+        }define host{ 
+
+                              use:        client
+                              host_name   Chevron-Sylhet-Office-Lackatoora-CPE-2-Loopback
+                              alias       Chevron-Sylhet-Office-Lackatoora-CPE-2-Loopback
+                              address     103.23.40.53
+        }define host{ 
+
+                              use:        client
+                              host_name   Chevron-MCS-Kamaychara-CPE-Loopback
+                              alias       Chevron-MCS-Kamaychara-CPE-Loopback
+                              address     103.23.40.54
+        }define host{ 
+
+                              use:        client
+                              host_name   Chevron-BYGP-Karimpur-CPE-Loopback
+                              alias       Chevron-BYGP-Karimpur-CPE-Loopback
+                              address     103.23.40.55
+        }define host{ 
+
+                              use:        client
+                              host_name   Chevron-MMS-Muchai-CPE-1-Loopback
+                              alias       Chevron-MMS-Muchai-CPE-1-Loopback
+                              address     103.23.40.56
+        }define host{ 
+
+                              use:        client
+                              host_name   Chevron-GTCL-Ashugonj-CPE-1-Loopback
+                              alias       Chevron-GTCL-Ashugonj-CPE-1-Loopback
+                              address     103.23.40.57
+        }define host{ 
+
+                              use:        Client
+                              host_name   Chevron-MBGP-Kalapur-CPE-Loopback
+                              alias       Chevron-MBGP-Kalapur-CPE-Loopback
+                              address     103.23.40.58
+        }define host{ 
+
+                              use:        backbone
+                              host_name   BTRC-PoP-Loopback
+                              alias       BTRC-PoP-Loopback
+                              address     103.23.40.59
+        }define host{ 
+
+                              use:        client
+                              host_name   Asiatic-Mindshare-CPE-Loopback
+                              alias       Asiatic-Mindshare-CPE-Loopback
+                              address     103.23.40.60
+        }define host{ 
+
+                              use:        client
+                              host_name   PCCW-017-018-Le-Meredian-CPE-Loopback
+                              alias       PCCW-017-018-Le-Meredian-CPE-Loopback
+                              address     103.23.40.61
+        }define host{ 
+
+                              use:        client
+                              host_name   Media-Consultant-CPE-Loopback
+                              alias       Media-Consultant-CPE-Loopback
+                              address     103.23.40.62
+        }define host{ 
+
+                              use:        client
+                              host_name   Chevron-MMS-Muchai-CPE-2
+                              alias       Chevron-MMS-Muchai-CPE-2
+                              address     103.23.40.63
+        }define host{ 
+
+                              use:        client
+                              host_name   Novotel-NovoAir-CPE-Loopback
+                              alias       Novotel-NovoAir-CPE-Loopback
+                              address     103.23.40.64
+        }define host{ 
+
+                              use:        client
+                              host_name   Aisatic-CE-CPE-Loopback
+                              alias       Aisatic-CE-CPE-Loopback
+                              address     103.23.40.65
+        }define host{ 
+
+                              use:        client
+                              host_name   CNL-Polypack-Dhaka-CPE-Loopback
+                              alias       CNL-Polypack-Dhaka-CPE-Loopback
+                              address     103.23.40.66
+        }define host{ 
+
+                              use:        client
+                              host_name   Cloud-Router-1-Loopback
+                              alias       Cloud-Router-1-Loopback
+                              address     103.23.40.67
+        }define host{ 
+
+                              use:        client
+                              host_name   Cloud-Router-2-Loopback
+                              alias       Cloud-Router-2-Loopback
+                              address     103.23.40.68
+        }define host{ 
+
+                              use:        client
+                              host_name   BTRC-CPE-Loopback
+                              alias       BTRC-CPE-Loopback
+                              address     103.23.40.72
+        }define host{ 
+
+                              use:        client
+                              host_name   Chevron-GTCL-CPE-2-Ashuganj-Loopback
+                              alias       Chevron-GTCL-CPE-2-Ashuganj-Loopback
+                              address     103.23.40.73
+        }define host{ 
+
+                              use:        client
+                              host_name   Gerry-Weber-PCCW018-CPE-Loopback
+                              alias       Gerry-Weber-PCCW018-CPE-Loopback
+                              address     103.23.40.76
+        }define host{ 
+
+                              use:        Client
+                              host_name   Metlife-CPE-Loopback
+                              alias       Metlife-CPE-Loopback
+                              address     103.23.40.77
+        }define host{ 
+
+                              use:        client
+                              host_name   Shohoz-Dot-Com-CE-Managed-By-Client
+                              alias       Shohoz-Dot-Com-CE-Managed-By-Client
+                              address     103.23.40.78
+        }define host{ 
+
+                              use:        client
+                              host_name   Scan-Global-IPTSP-CPE-Loopback
+                              alias       Scan-Global-IPTSP-CPE-Loopback
+                              address     103.23.40.79
+        }define host{ 
+
+                              use:        client
+                              host_name   Kona-Software-CPE-Loopback
+                              alias       Kona-Software-CPE-Loopback
+                              address     103.23.40.80
+        }define host{ 
+
+                              use:        client
+                              host_name   Global-Apparel-HQ-CPE-Loopback
+                              alias       Global-Apparel-HQ-CPE-Loopback
+                              address     103.23.40.81
+        }define host{ 
+
+                              use:        client
+                              host_name   Global-Apparel-HQ-Country-Director-room-CPE-Loopback
+                              alias       Global-Apparel-HQ-Country-Director-room-CPE-Loopback
+                              address     103.23.40.82
+        }define host{ 
+
+                              use:        backbone
+                              host_name   Narayanganj-PoP-Loopback
+                              alias       Narayanganj-PoP-Loopback
+                              address     103.23.40.84
+        }define host{ 
+
+                              use:        backbone
+                              host_name   GGC-Akamai-RTR-Loopback
+                              alias       GGC-Akamai-RTR-Loopback
+                              address     103.23.40.85
+        }define host{ 
+
+                              use:        client
+                              host_name   Tech-For-Bangladesh-CPE-Loopback
+                              alias       Tech-For-Bangladesh-CPE-Loopback
+                              address     103.23.40.86
+        }define host{ 
+
+                              use:        client
+                              host_name   Qatar-Embassy-CPE-Loopback
+                              alias       Qatar-Embassy-CPE-Loopback
+                              address     103.23.40.87
+        }define host{ 
+
+                              use:        client
+                              host_name   Nestle-TATA013-CPE-Loopback
+                              alias       Nestle-TATA013-CPE-Loopback
+                              address     103.23.40.88
+        }define host{ 
+
+                              use:        client
+                              host_name   Standard-Group-CTG-CPE-Loopback
+                              alias       Standard-Group-CTG-CPE-Loopback
+                              address     103.23.40.91
+        }define host{ 
+
+                              use:        client
+                              host_name   Standard-Dhaka-CTG-CPE-Loopback
+                              alias       Standard-Dhaka-CTG-CPE-Loopback
+                              address     103.23.40.92
+        }define host{ 
+
+                              use:        client
+                              host_name   Confidence-Group-CPE-Loopback
+                              alias       Confidence-Group-CPE-Loopback
+                              address     103.23.40.93
+        }define host{ 
+
+                              use:        client
+                              host_name   Milvik-IPTSP-CPE-Loopback
+                              alias       Milvik-IPTSP-CPE-Loopback
+                              address     103.23.40.95
+        }define host{ 
+
+                              use:        backbone
+                              host_name   Winner-Gazipur-PoP-Loopback
+                              alias       Winner-Gazipur-PoP-Loopback
+                              address     103.23.40.96
+        }define host{ 
+
+                              use:        client
+                              host_name   PCCW028-CPE-1-Loopback
+                              alias       PCCW028-CPE-1-Loopback
+                              address     103.23.40.97
+        }define host{ 
+
+                              use:        client
+                              host_name   PCCW028-CPE-2-Loopback
+                              alias       PCCW028-CPE-2-Loopback
+                              address     103.23.40.98
+        }define host{ 
+
+                              use:        client
+                              host_name   PCCW-027-Gazipur-CPE-1-Loopback
+                              alias       PCCW-027-Gazipur-CPE-1-Loopback
+                              address     PCCW-027-Gazipur-CPE-1-Loopback
+        }define host{ 
+
+                              use:        client
+                              host_name   PCCW-027-Gazipur-CPE-2-Loopback
+                              alias       PCCW-027-Gazipur-CPE-2-Loopback
+                              address     103.23.40.100
+        }define host{ 
+
+                              use:        client
+                              host_name   C-And-A-PCCW012-CPE-Loopback
+                              alias       C-And-A-PCCW012-CPE-Loopback
+                              address     103.23.40.101
+        }define host{ 
+
+                              use:        client
+                              host_name   Ring-Tech-CPE-Loopback
+                              alias       Ring-Tech-CPE-Loopback
+                              address     103.23.40.102
+        }define host{ 
+
+                              use:        backbone
+                              host_name   Khulna-ICX-CPE-Loopback
+                              alias       Khulna-ICX-CPE-Loopback
+                              address     103.23.40.104
+        }define host{ 
+
+                              use:        client
+                              host_name   M-n-H-CPE-Loopback
+                              alias       M-n-H-CPE-Loopback
+                              address     103.23.40.106
+        }define host{ 
+
+                              use:        client
+                              host_name   Voicetel-CPE-Loopback
+                              alias       Voicetel-CPE-Loopback
+                              address     103.23.40.107
+        }define host{ 
+
+                              use:        client
+                              host_name   BIFFL-Eskaton-CPE-Loopback
+                              alias       BIFFL-Eskaton-CPE-Loopback
+                              address     103.23.40.108
+        }define host{ 
+
+                              use:        client
+                              host_name   BIFFL-Kakrail-CPE-Loopback
+                              alias       BIFFL-Kakrail-CPE-Loopback
+                              address     103.23.40.109
+        }define host{ 
+
+                              use:        client
+                              host_name   QA-Service-HQ-Uttara-Office-CPE-Loopback
+                              alias       QA-Service-HQ-Uttara-Office-CPE-Loopback
+                              address     103.23.40.111
+        }define host{ 
+
+                              use:        client
+                              host_name   Nexdecade-CPE-Loopback
+                              alias       Nexdecade-CPE-Loopback
+                              address     103.23.40.112
+        }define host{ 
+
+                              use:        backbone
+                              host_name   Airpoirt-CPE-Loopback
+                              alias       Airpoirt-CPE-Loopback
+                              address     103.23.40.116
+        }define host{ 
+
+                              use:        client
+                              host_name   PVH-PCCW010-011-CPE-Loopback
+                              alias       PVH-PCCW010-011-CPE-Loopback
+                              address     103.23.40.117
+        }define host{ 
+
+                              use:        client
+                              host_name   Blue-Gold-Pautakhali-CPE-Loopback
+                              alias       Blue-Gold-Pautakhali-CPE-Loopback
+                              address     103.23.40.118
+        }define host{ 
+
+                              use:        client
+                              host_name   Blue-Gold-Satkhira-CPE-Loopback
+                              alias       Blue-Gold-Satkhira-CPE-Loopback
+                              address     103.23.40.119
+        }define host{ 
+
+                              use:        client
+                              host_name   Tusuka-Fashion-CPE-Loopback
+                              alias       Tusuka-Fashion-CPE-Loopback
+                              address     103.23.40.121
+        }define host{ 
+
+                              use:        client
+                              host_name   Tusuka-Apperal-CPE-Loopback
+                              alias       Tusuka-Apperal-CPE-Loopback
+                              address     103.23.40.122
+        }define host{ 
+
+                              use:        client
+                              host_name   Blue-Gold-Dhaka-HQ-CPE-Loopback
+                              alias       Blue-Gold-Dhaka-HQ-CPE-Loopback
+                              address     103.23.40.123
+        }define host{ 
+
+                              use:        client
+                              host_name   Asiatic-MCL-HQ-CPE-Loopback
+                              alias       Asiatic-MCL-HQ-CPE-Loopback
+                              address     103.23.40.124
+        }define host{ 
+
+                              use:        client
+                              host_name   Forethought-CPE-Loopback
+                              alias       Forethought-CPE-Loopback
+                              address     103.23.40.125
+        }define host{ 
+
+                              use:        client
+                              host_name   ITLB-Factory-CPE-Loopback
+                              alias       ITLB-Factory-CPE-Loopback
+                              address     103.23.40.126
+        }define host{ 
+
+                              use:        client
+                              host_name   ITLB-HQ-CPE-Loopback
+                              alias       ITLB-HQ-CPE-Loopback
+                              address     103.23.40.127
+        }define host{ 
+
+                              use:        client
+                              host_name   TATA-020-CPE-Loopback
+                              alias       TATA-020-CPE-Loopback
+                              address     103.23.40.74
+        }define host{ 
+
+                              use:        client
+                              host_name   24-7-Sourcing-Loopback
+                              alias       24-7-Sourcing-Loopback
+                              address     103.23.40.75
+        }define host{ 
+
+                              use:        backbone
+                              host_name   Shahjadpur-RTR-to-St-Martin-Agrabad-PoP-Peering-Shahjadpur-end
+                              alias       Shahjadpur-RTR-to-St-Martin-Agrabad-PoP-Peering-Shahjadpur-end
+                              address     103.23.40.129
+        }define host{ 
+
+                              use:        backbone
+                              host_name   Shahjadpur-RTR-to-St-Martin-Agrabad-PoP-Peering-Agrabad-end
+                              alias       Shahjadpur-RTR-to-St-Martin-Agrabad-PoP-Peering-Agrabad-end
+                              address     103.23.40.130
+        }define host{ 
+
+                              use:        backbone
+                              host_name   Shahjadpur-Cisco-NNI-to-ASR-9k-peering
+                              alias       Shahjadpur-Cisco-NNI-to-ASR-9k-peering
+                              address     103.23.40.133
+        }
